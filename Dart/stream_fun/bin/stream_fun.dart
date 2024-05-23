@@ -3,6 +3,7 @@ import 'dart:async';
 void main() async {
   // streamWithSingleListener();
   // streamWithBroadcast();
+  streamsFromScratch();
 }
 
 streamWithSingleListener() async {
@@ -39,4 +40,24 @@ streamWithBroadcast() async {
   controller.add(3);
   await Future.delayed(Duration(seconds: 3));
   controller.add(10);
+}
+
+streamsFromScratch() async {
+  var stream = Stream.fromIterable([1, 3, 5, 8]);
+  stream.listen((event) {
+    print(event);
+  });
+
+  // or
+  Stream<int> countStream(int max) async* {
+    for (int i = 1; i <= max; i++) {
+      yield i;
+    }
+  }
+
+  var stream2 = countStream(5);
+
+  await for (var value in stream2) {
+    print(value); // Output: 1, 2, 3, 4, 5
+  }
 }
