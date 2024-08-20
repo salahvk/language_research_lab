@@ -3,7 +3,7 @@ const getAllTasks = (req, res) => {
 };
 
 const getTask = (req, res) => {
-  res.send("get single task");
+  res.json({id:req.params.id});
 };
 
 const createTask = (req, res) => {
@@ -18,4 +18,4 @@ const deleteTask = (req, res) => {
   res.send("delete task");
 };
 
-module.exports = { getAllTasks };
+module.exports = { getAllTasks, getTask, createTask, updateTask, deleteTask };
